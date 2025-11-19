@@ -3,7 +3,6 @@ from turing_machine import TuringMachineConfig
 
 
 if __name__ == "__main__":
-    # Example usage
     config_file = 'files/turing_machine_config.yaml'
     
     try:

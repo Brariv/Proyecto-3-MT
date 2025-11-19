@@ -6,7 +6,7 @@ configurations from YAML files.
 """
 
 import yaml
-from typing import Dict, List, Any
+from typing import  Any
 from pathlib import Path
 
 
@@ -37,7 +37,7 @@ class TuringMachineConfig:
         self.delta = None
         self.simulation_strings = None
         
-    def load_config(self) -> Dict[str, Any]:
+    def load_config(self) -> dict[str, Any]:
         """
         Load the YAML configuration file.
         
@@ -68,7 +68,7 @@ class TuringMachineConfig:
             self.delta = self.config.get('delta', [])
             self.simulation_strings = self.config.get('simulation_strings', [])
     
-    def get_states(self) -> Dict[str, Any]:
+    def get_states(self) -> dict[str, Any]:
         """
         Get the states configuration.
         
@@ -77,7 +77,7 @@ class TuringMachineConfig:
         """
         return self.q_states
     
-    def get_state_list(self) -> List[str]:
+    def get_state_list(self) -> list[str]:
         """
         Get the list of states.
         
@@ -104,7 +104,7 @@ class TuringMachineConfig:
         """
         return self.q_states.get('final', '') if self.q_states else ''
     
-    def get_alphabet(self) -> List[str]:
+    def get_alphabet(self) -> list[str]:
         """
         Get the alphabet symbols.
         
@@ -113,7 +113,7 @@ class TuringMachineConfig:
         """
         return self.alphabet
     
-    def get_tape_alphabet(self) -> List[str]:
+    def get_tape_alphabet(self) -> list[str]:
         """
         Get the tape alphabet symbols.
         
@@ -122,7 +122,7 @@ class TuringMachineConfig:
         """
         return self.tape_alphabet
     
-    def get_delta(self) -> List[Dict[str, Any]]:
+    def get_delta(self) -> list[dict[str, Any]]:
         """
         Get the transition function (delta).
         
@@ -131,7 +131,7 @@ class TuringMachineConfig:
         """
         return self.delta
     
-    def get_simulation_strings(self) -> List[str]:
+    def get_simulation_strings(self) -> list[str]:
         """
         Get the simulation strings.
         
@@ -181,25 +181,4 @@ class TuringMachineConfig:
         print("\n" + "=" * 60)
 
 
-def main():
-    """
-    Main function to demonstrate usage of the TuringMachineConfig class.
-    """
-    # Example usage
-    config_file = 'turing_machine_config.yaml'
-    
-    try:
-        tm_config = TuringMachineConfig(config_file)
-        tm_config.load_config()
-        tm_config.print_config()
-        
-    except FileNotFoundError as e:
-        print(f"Error: {e}")
-    except yaml.YAMLError as e:
-        print(f"Error parsing YAML file: {e}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
 
-
-if __name__ == "__main__":
-    main()

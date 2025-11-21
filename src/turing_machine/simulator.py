@@ -103,7 +103,7 @@ class TuringMachine:
 
             print("State:",state)
             print("Mem Cache:",mem_cache)
-            print("Tape Output:",tape[head])
+            print("Tape Output:",tape)
 
             # Move head
             move = out["tape_displacement"]

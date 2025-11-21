@@ -94,5 +94,5 @@ simulation_strings:
   - 'aab#aab'
   - 'ab#ab'
   - 'abbababa#aba'
-  - 'aaa#aaa'
+  - 'aaa#bbb'
 

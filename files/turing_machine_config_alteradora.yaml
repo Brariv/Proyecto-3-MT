@@ -1,0 +1,77 @@
+---
+
+q_states:
+  q_list:
+    - '0'     # scan derecha: detectar si existe al menos una 'c'
+    - 'ra2b'  # rewrite izquierda si hay 'c': a -> b
+    - 'rb2a'  # rewrite izquierda si NO hay 'c': b -> a
+    - '1'     # aceptación
+  initial: '0'
+  final: '1'
+
+alphabet:
+  - 'a'
+  - 'b'
+  - 'c'
+
+tape_alphabet:
+  - 'a'
+  - 'b'
+  - 'c'
+  - 'B'
+
+delta:
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'a' }
+    output: { final_state: '0', mem_cache_value: 'N', tape_output: 'a', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'b' }
+    output: { final_state: '0', mem_cache_value: 'N', tape_output: 'b', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'c' }
+    output: { final_state: '0', mem_cache_value: 'C', tape_output: 'c', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'N', tape_input: 'a' }
+    output: { final_state: '0', mem_cache_value: 'N', tape_output: 'a', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'N', tape_input: 'b' }
+    output: { final_state: '0', mem_cache_value: 'N', tape_output: 'b', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'N', tape_input: 'c' }
+    output: { final_state: '0', mem_cache_value: 'C', tape_output: 'c', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'C', tape_input: 'a' }
+    output: { final_state: '0', mem_cache_value: 'C', tape_output: 'a', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'C', tape_input: 'b' }
+    output: { final_state: '0', mem_cache_value: 'C', tape_output: 'b', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'C', tape_input: 'c' }
+    output: { final_state: '0', mem_cache_value: 'C', tape_output: 'c', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'N', tape_input: 'B' }
+    output: { final_state: 'rb2a', mem_cache_value: 'N', tape_output: 'B', tape_displacement: 'L' }
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'B' }
+    output: { final_state: 'rb2a', mem_cache_value: 'N', tape_output: 'B', tape_displacement: 'L' }
+
+  - params: { initial_state: '0', mem_cache_value: 'C', tape_input: 'B' }
+    output: { final_state: 'ra2b', mem_cache_value: 'C', tape_output: 'B', tape_displacement: 'L' }
+
+  - params: { initial_state: 'ra2b', mem_cache_value: 'C', tape_input: 'a' }
+    output: { final_state: 'ra2b', mem_cache_value: 'C', tape_output: 'b', tape_displacement: 'L' }
+  - params: { initial_state: 'ra2b', mem_cache_value: 'C', tape_input: 'b' }
+    output: { final_state: 'ra2b', mem_cache_value: 'C', tape_output: 'b', tape_displacement: 'L' }
+  - params: { initial_state: 'ra2b', mem_cache_value: 'C', tape_input: 'c' }
+    output: { final_state: 'ra2b', mem_cache_value: 'C', tape_output: 'c', tape_displacement: 'L' }
+
+  - params: { initial_state: 'ra2b', mem_cache_value: 'C', tape_input: 'B' }
+    output: { final_state: '1', mem_cache_value: 'C', tape_output: 'B', tape_displacement: 'R' }
+
+  - params: { initial_state: 'rb2a', mem_cache_value: 'N', tape_input: 'a' }
+    output: { final_state: 'rb2a', mem_cache_value: 'N', tape_output: 'a', tape_displacement: 'L' }
+  - params: { initial_state: 'rb2a', mem_cache_value: 'N', tape_input: 'b' }
+    output: { final_state: 'rb2a', mem_cache_value: 'N', tape_output: 'a', tape_displacement: 'L' }
+  - params: { initial_state: 'rb2a', mem_cache_value: 'N', tape_input: 'c' }
+    output: { final_state: 'rb2a', mem_cache_value: 'N', tape_output: 'c', tape_displacement: 'L' }
+
+  - params: { initial_state: 'rb2a', mem_cache_value: 'N', tape_input: 'B' }
+    output: { final_state: '1', mem_cache_value: 'N', tape_output: 'B', tape_displacement: 'R' }
+
+simulation_strings:
+  - "aaabbb"    # b->a => "aaaaaa"
+  - "bbcccc"     # a->b no afecta => "bbcccc"
+  - "abcabab"    # a->b => "bbcbbb"
+  - "cccccc"      # sin cambios => "cccccc"

@@ -98,7 +98,10 @@ class TuringMachine:
             # Aplicar efectos de la transición
             state = out["final_state"]
             mem_cache = out["mem_cache_value"]
+            print("Mem cache now:", mem_cache)
             tape[head] = out["tape_output"]
+            print("Tape now:", self._tape_to_string(tape))
+            
 
             # Movimiento del cabezal
             move = out["tape_displacement"]

@@ -1,0 +1,68 @@
+---
+# MT reconocedora por paridad de 'a'
+# Lenguaje reconocido:
+#   L = { w ∈ {a,b,c}* | #a(w) es PAR }
+#
+# Regla:
+# - Si #a es PAR  -> aceptar
+# - Si #a es IMPAR -> rechazar
+#
+# Uso de mem_cache_value:
+# - B : estado inicial del simulador (se trata como paridad E)
+# - E : par
+# - O : impar
+
+q_states:
+  q_list:
+    - '0'    # scan derecha: calcular paridad (#a)
+    - 'rej'  # estado de rechazo (no es final)
+    - '1'    # aceptación
+  initial: '0'
+  final: '1'
+
+alphabet:
+  - 'a'
+  - 'b'
+  - 'c'
+
+tape_alphabet:
+  - 'a'
+  - 'b'
+  - 'c'
+  - 'B'
+
+delta:
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'a' }
+    output: { final_state: '0', mem_cache_value: 'O', tape_output: 'a', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'b' }
+    output: { final_state: '0', mem_cache_value: 'E', tape_output: 'b', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'c' }
+    output: { final_state: '0', mem_cache_value: 'E', tape_output: 'c', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'E', tape_input: 'a' }
+    output: { final_state: '0', mem_cache_value: 'O', tape_output: 'a', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'E', tape_input: 'b' }
+    output: { final_state: '0', mem_cache_value: 'E', tape_output: 'b', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'E', tape_input: 'c' }
+    output: { final_state: '0', mem_cache_value: 'E', tape_output: 'c', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'O', tape_input: 'a' }
+    output: { final_state: '0', mem_cache_value: 'E', tape_output: 'a', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'O', tape_input: 'b' }
+    output: { final_state: '0', mem_cache_value: 'O', tape_output: 'b', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'O', tape_input: 'c' }
+    output: { final_state: '0', mem_cache_value: 'O', tape_output: 'c', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'E', tape_input: 'B' }
+    output: { final_state: '1', mem_cache_value: 'E', tape_output: 'B', tape_displacement: 'R' }
+  - params: { initial_state: '0', mem_cache_value: 'B', tape_input: 'B' }
+    output: { final_state: '1', mem_cache_value: 'E', tape_output: 'B', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'O', tape_input: 'B' }
+    output: { final_state: 'rej', mem_cache_value: 'O', tape_output: 'B', tape_displacement: 'R' }
+
+simulation_strings:
+  - "aaabaa"    #  RECHAZA
+  - "aabbcc"  #  ACEPTA
+  - "bbbccc"  #  ACEPTA
+  - "acaca"   #  RECHAZA

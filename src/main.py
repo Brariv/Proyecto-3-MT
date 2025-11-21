@@ -22,6 +22,7 @@ if __name__ == "__main__":
             accepted, final_tape, trace = tm.simulate(string)
 
             print("Steps:", len(trace), "\n")
+            print("Final Tape:", final_tape, "\n")
             
             if parse_args.validator_mode:
                 print("Is it valid?")

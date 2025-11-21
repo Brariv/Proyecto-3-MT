@@ -5,11 +5,6 @@ class TMSimulationError(Exception):
 
 
 class TuringMachine:
-    """
-    A simulator for the Turing Machine defined by TuringMachineConfig.
-    Supports mem_cache_value + tape input as transition keys.
-    """
-
     def __init__(self, config):
         self.config = config
         self.states = set(config.get_state_list())
@@ -24,12 +19,7 @@ class TuringMachine:
         self._build_transition_map()
 
     def _build_transition_map(self):
-        """
-        Convert delta entries into a fast lookup table:
-            (state, mem_val, tape_symbol) → output_dict
-        Also detect duplicate/conflicting transitions.
-        """
-        for entry in self.transitions:
+       for entry in self.transitions:
             params = entry["params"]
             output = entry["output"]
 
@@ -45,7 +35,6 @@ class TuringMachine:
             self.delta_map[key] = output
 
     def validate(self) -> bool:
-        """Validate states, symbols, and transitions."""
 
         # Check initial + final
         if self.initial_state not in self.states:
@@ -80,14 +69,6 @@ class TuringMachine:
         return True
 
     def simulate(self, input_str: str, max_steps: int = 10000):
-        """
-        Run the TM on a given input string.
-        Returns:
-            accepted: bool
-            final_tape: str
-            trace: list of (state, head_pos, tape_snapshot, mem_cache)
-        """
-
         tape = list(input_str)
         head = 0
         state = self.initial_state
@@ -100,7 +81,7 @@ class TuringMachine:
             if i >= len(tape):
                 tape.extend(["_"] * (i - len(tape) + 1))
 
-        for step in range(max_steps):
+        for _ in range(max_steps):
             ensure_tape(head)
             symbol = tape[head]
 
@@ -119,6 +100,10 @@ class TuringMachine:
             state = out["final_state"]
             mem_cache = out["mem_cache_value"]
             tape[head] = out["tape_output"]
+
+            print("State:",state)
+            print("Mem Cache:",mem_cache)
+            print("Tape Output:",tape[head])
 
             # Move head
             move = out["tape_displacement"]

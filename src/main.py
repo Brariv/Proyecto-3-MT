@@ -16,15 +16,18 @@ if __name__ == "__main__":
         tm = TuringMachine(tm_config)
 
         for string in tm_config.get_simulation_strings():
+
+            print(f"-----Input: {string}----")
+
             accepted, final_tape, trace = tm.simulate(string)
 
-            print(f"Input: {string}")
-            print(f"Final Tape: {final_tape}")
             print("Steps:", len(trace), "\n")
             
             if parse_args.validator_mode:
                 print("Is it valid?")
                 print(accepted, "\n")
+            print("----------------------------")
+
 
 
     except FileNotFoundError as e:

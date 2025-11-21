@@ -1,5 +1,3 @@
----
-# Lista de estados
 q_states:
   q_list:
     - '0'
@@ -25,71 +23,75 @@ tape_alphabet:
   - '_'
 
 delta:
-- params:
-    initial_state: '0'
-    mem_cache_value: 'blank'
-    tape_input: 'a'
-  output:
-    final_state: '1'
-    mem_cache_value: 'a'
-    tape_output: 'X'
-    tape_displacement: 'R'
-- params:
-    initial_state: '1'
-    mem_cache_value: 'a'
-    tape_input: 'a'
-  output:
-    final_state: '1'
-    mem_cache_value: 'a'
-    tape_output: 'a'
-    tape_displacement: 'R'
-- params:
-    initial_state: '1'
-    mem_cache_value: 'a'
-    tape_input: '#'
-  output:
-    final_state: '2'
-    mem_cache_value: 'a'
-    tape_output: '#'
-    tape_displacement: 'R'
-- params:
-    initial_state: '2'
-    mem_cache_value: 'a'
-    tape_input: 'a'
-  output:
-    final_state: '3'
-    mem_cache_value: 'blank'
-    tape_output: 'X'
-    tape_displacement: 'L'
-- params:
-    initial_state: '3'
-    mem_cache_value: 'blank'
-    tape_input: '#'
-  output:
-    final_state: '4'
-    mem_cache_value: 'blank'
-    tape_output: '#'
-    tape_displacement: 'L'
-- params:
-    initial_state: '4'
-    mem_cache_value: 'blank'
-    tape_input: 'X'
-  output:
-    final_state: '0'
-    mem_cache_value: 'blank'
-    tape_output: 'X'
-    tape_displacement: 'R'
-- params:
-    initial_state: '0'
-    mem_cache_value: 'blank'
-    tape_input: '#'
-  output:
-    final_state: '5'
-    mem_cache_value: 'blank'
-    tape_output: '#'
-    tape_displacement: 'S'
+  - params: { initial_state: '0', mem_cache_value: 'blank', tape_input: 'a' }
+    output: { final_state: '1', mem_cache_value: 'a', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'blank', tape_input: 'b' }
+    output: { final_state: '1', mem_cache_value: 'b', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'a', tape_input: 'a' }
+    output: { final_state: '1', mem_cache_value: 'a', tape_output: 'a', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'a', tape_input: 'b' }
+    output: { final_state: '1', mem_cache_value: 'a', tape_output: 'b', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'b', tape_input: 'a' }
+    output: { final_state: '1', mem_cache_value: 'b', tape_output: 'a', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'b', tape_input: 'b' }
+    output: { final_state: '1', mem_cache_value: 'b', tape_output: 'b', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'a', tape_input: 'X' }
+    output: { final_state: '1', mem_cache_value: 'a', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'b', tape_input: 'X' }
+    output: { final_state: '1', mem_cache_value: 'b', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'a', tape_input: '#' }
+    output: { final_state: '2', mem_cache_value: 'a', tape_output: '#', tape_displacement: 'R' }
+
+  - params: { initial_state: '1', mem_cache_value: 'b', tape_input: '#' }
+    output: { final_state: '2', mem_cache_value: 'b', tape_output: '#', tape_displacement: 'R' }
+
+  - params: { initial_state: '2', mem_cache_value: 'a', tape_input: 'a' }
+    output: { final_state: '3', mem_cache_value: 'blank', tape_output: 'X', tape_displacement: 'L' }
+
+  - params: { initial_state: '2', mem_cache_value: 'b', tape_input: 'b' }
+    output: { final_state: '3', mem_cache_value: 'blank', tape_output: 'X', tape_displacement: 'L' }
+
+  - params: { initial_state: '2', mem_cache_value: 'a', tape_input: 'X' }
+    output: { final_state: '2', mem_cache_value: 'a', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '2', mem_cache_value: 'b', tape_input: 'X' }
+    output: { final_state: '2', mem_cache_value: 'b', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '3', mem_cache_value: 'blank', tape_input: '#' }
+    output: { final_state: '4', mem_cache_value: 'blank', tape_output: '#', tape_displacement: 'L' }
+
+  - params: { initial_state: '4', mem_cache_value: 'blank', tape_input: 'X' }
+    output: { final_state: '0', mem_cache_value: 'blank', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '4', mem_cache_value: 'blank', tape_input: 'a' }
+    output: { final_state: '4', mem_cache_value: 'blank', tape_output: 'a', tape_displacement: 'L' }
+
+  - params: { initial_state: '4', mem_cache_value: 'blank', tape_input: 'b' }
+    output: { final_state: '4', mem_cache_value: 'blank', tape_output: 'b', tape_displacement: 'L' }
+
+  - params: { initial_state: '4', mem_cache_value: 'blank', tape_input: '#' }
+    output: { final_state: '4', mem_cache_value: 'blank', tape_output: '#', tape_displacement: 'L' }
+
+  - params: { initial_state: '0', mem_cache_value: 'blank', tape_input: 'X' }
+    output: { final_state: '0', mem_cache_value: 'blank', tape_output: 'X', tape_displacement: 'R' }
+
+  - params: { initial_state: '0', mem_cache_value: 'blank', tape_input: '#' }
+    output: { final_state: '5', mem_cache_value: 'blank', tape_output: '#', tape_displacement: 'S' }
+
+
+  - params: { initial_state: '3', mem_cache_value: 'blank', tape_input: 'X' }
+    output: { final_state: '4', mem_cache_value: 'blank', tape_output: 'X', tape_displacement: 'L' }
 
 simulation_strings:
   - 'aab#aab'
   - 'ab#ab'
   - 'abbababa#aba'
+

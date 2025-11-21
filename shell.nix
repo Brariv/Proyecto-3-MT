@@ -4,8 +4,7 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pipyPackages; [
-    graphviz
-    pprintpp
+    pyyaml
     pkgs.pyright
   ];
 }

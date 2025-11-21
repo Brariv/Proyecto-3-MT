@@ -1,6 +1,6 @@
 
 class TMSimulationError(Exception):
-    """Raised when the Turing Machine encounters an invalid configuration or operation."""
+    # Raised when the Turing Machine encounters an invalid configuration or operation.
     pass
 
 

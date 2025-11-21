@@ -1,9 +1,9 @@
-"""
-Turing Machine YAML Configuration Reader
 
-This module provides functionality to read and parse Turing Machine 
-configurations from YAML files.
-"""
+# Turing Machine YAML Configuration Reader
+
+# This module provides functionality to read and parse Turing Machine 
+# configurations from YAML files.
+
 
 import yaml
 from typing import  Any
